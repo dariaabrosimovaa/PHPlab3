@@ -2,33 +2,30 @@
 
 require 'vendor/autoload.php';
 
-use App\MagicClass;
+use App\Point;
+use App\Vector;
 
-echo "1. __construct (создание объекта):\n";
-$obj = new MagicClass();
-echo "\n";
+$T1 = new Point(2, 3);
+echo "Точка T1: $T1\n";
 
-echo "2. __set и __get (работа со свойствами):\n";
-$obj->testProperty = 'test value';
-$value = $obj->testProperty;
-echo "\n";
+$V1 = new Vector(3, 4);
+echo "Вектор V1: $V1\n";
 
-echo "3. __call (вызов несуществующего метода):\n";
-$obj->undefinedMethod('parameter');
-echo "\n";
+$V2 = new Vector(0, 0);
+echo "Вектор V2: $V2\n";
 
-echo "4. __callStatic (вызов несуществующего статического метода):\n";
-MagicClass::staticUndefinedMethod('param');
-echo "\n";
+$V3 = new Vector(-4, 3);
+echo "Вектор V3: $V3\n\n";
 
-echo "5. __toString (преобразование в строку):\n";
-echo "Объект как строка: " . $obj . "\n";
-echo "\n";
+echo "Длины векторов:\n";
+echo "Длина V1: " . $V1->length() . "\n";
+echo "Длина V2: " . $V2->length() . "\n";
+echo "Длина V3: " . $V3->length() . "\n\n";
 
-echo "6. __invoke (вызов объекта как функцию):\n";
-$obj('invoke parameter');
-echo "\n";
+echo "Проверка перпендикулярности:\n";
+echo "V3 перпендикулярен V1: " . ($V3->isPerpendicularTo($V1) ? 'Да' : 'Нет') . "\n\n";
 
-echo "7. __destruct (уничтожение объекта):\n";
-unset($obj);
-echo "\n";
+echo "Перенос точки T1 на вектор V1:\n";
+echo "До переноса: $T1\n";
+$T1->move($V1->x, $V1->y);
+echo "После переноса: $T1\n";
